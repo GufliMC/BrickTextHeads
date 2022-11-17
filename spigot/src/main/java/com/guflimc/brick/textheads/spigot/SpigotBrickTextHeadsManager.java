@@ -49,7 +49,7 @@ public class SpigotBrickTextHeadsManager extends BrickTextHeadsManager {
                         + playerId.toString().replace("-", ""));
                 try (InputStreamReader isr = new InputStreamReader(url.openStream())) {
                     JsonElement json = JsonParser.parseReader(isr);
-                    if ( json == null ) {
+                    if ( json.isJsonNull() ) {
                         return null;
                     }
                     JsonObject texture = json.getAsJsonObject().get("properties").getAsJsonArray().get(0).getAsJsonObject();
