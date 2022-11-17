@@ -1,0 +1,9 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    api project(':api')
+
+    implementation 'com.google.code.gson:gson:2.+'
+}

@@ -1,0 +1,31 @@
+plugins {
+    id 'net.minecrell.plugin-yml.bukkit' version '0.5.1'
+}
+
+repositories {
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+}
+
+dependencies {
+    // provided by platform
+    compileOnly 'org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT'
+
+    compileOnly 'com.guflimc.brick.placeholders:spigot-api:+'
+
+    implementation (project(':common')) {
+        exclude group: 'com.google.code.gson' // provided by platform
+    }
+}
+
+bukkit {
+    name = rootProject.name
+    main = 'com.guflimc.brick.textheads.spigot.SpigotBrickTextHeads'
+    description = 'Simple and lightweight plugin for loading text heads'
+    author = 'GufliMC'
+    website = 'https://github.com/GufliMC/BrickTextHeads'
+    softDepend = ["BrickPlaceholders"]
+    apiVersion = '1.18'
+}
+
+// I want it nice like that
+generateBukkitPluginDescription.group = "minecraft"
