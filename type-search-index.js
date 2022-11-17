@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.guflimc.brick.textheads.api","l":"TextHeadsAPI"},{"p":"com.guflimc.brick.textheads.api","l":"TextHeadsManager"}];updateSearchResults();
