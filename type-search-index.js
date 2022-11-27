@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.guflimc.brick.textheads.api","l":"TextHeadsAPI"},{"p":"com.guflimc.brick.textheads.api","l":"TextHeadsManager"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.guflimc.brick.texticons.api.domain","l":"TextIcon"},{"p":"com.guflimc.brick.texticons.api","l":"TextIconsAPI"},{"p":"com.guflimc.brick.texticons.api","l":"TextIconsManager"}];updateSearchResults();
