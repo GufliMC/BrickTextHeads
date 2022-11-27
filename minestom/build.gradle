@@ -7,16 +7,20 @@ repositories {
 }
 
 dependencies {
+    implementation project(':common');
+
     // provided by platform
     compileOnly 'com.github.Minestom:Minestom:-SNAPSHOT'
 
+    // provided by extension
     compileOnly 'com.guflimc.brick.placeholders:minestom-api:+'
 
-    // shadow
-    implementation project(':common');
+    // library
+    library 'com.guflimc.brick.scheduler:minestom-api:+'
+
 }
 
 minestomExtension {
-    entrypoint = "com.guflimc.brick.textheads.minestom.MinestomBrickTextHeads"
+    entrypoint = "com.guflimc.brick.texticons.minestom.MinestomBrickTextIcons"
     dependencies = ["BrickPlaceholders"]
 }

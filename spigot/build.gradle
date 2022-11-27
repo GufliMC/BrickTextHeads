@@ -7,22 +7,25 @@ repositories {
 }
 
 dependencies {
+    implementation project(':common');
+
     // provided by platform
     compileOnly 'org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT'
 
+    // provided by extensions
     compileOnly 'com.guflimc.brick.placeholders:spigot-api:+'
 
-    implementation (project(':common')) {
-        exclude group: 'com.google.code.gson' // provided by platform
-    }
+    // shadow
+    implementation 'com.guflimc.brick.scheduler:spigot-api:+'
+    implementation 'net.kyori:adventure-text-serializer-legacy:+'
 }
 
 bukkit {
     name = rootProject.name
-    main = 'com.guflimc.brick.textheads.spigot.SpigotBrickTextHeads'
-    description = 'Simple and lightweight plugin for loading text heads'
+    main = 'com.guflimc.brick.texticons.spigot.SpigotBrickTextIcons'
+    description = 'Simple and lightweight plugin for text icons with a resource pack.'
     author = 'GufliMC'
-    website = 'https://github.com/GufliMC/BrickTextHeads'
+    website = 'https://github.com/GufliMC/BrickTextIcons'
     softDepend = ["BrickPlaceholders"]
     apiVersion = '1.18'
 }

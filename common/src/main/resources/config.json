@@ -1,3 +1,7 @@
 {
-  "forceResourcePack": true
+  "resourcePack": {
+    "force": true,
+    "url": "https://download.mc-packs.net/pack/6facffa13fba481def8d3d0c35dea6ef21eebf8b.zip",
+    "hash": "6facffa13fba481def8d3d0c35dea6ef21eebf8b"
+  }
 }

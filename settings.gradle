@@ -5,7 +5,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'BrickTextHeads'
+rootProject.name = 'BrickTextIcons'
 
 include 'api'
 include 'common'

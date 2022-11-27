@@ -1,16 +1,14 @@
-package com.guflimc.brick.textheads.spigot;
+package com.guflimc.brick.texticons.spigot.heads;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.guflimc.brick.textheads.common.BrickTextHeadsManager;
-import org.apache.commons.lang.RandomStringUtils;
+import com.guflimc.brick.scheduler.api.Scheduler;
+import com.guflimc.brick.texticons.common.heads.AbstractHeadsManager;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.profile.PlayerProfile;
+import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -18,23 +16,17 @@ import java.util.Base64;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-public class SpigotBrickTextHeadsManager extends BrickTextHeadsManager {
+public class SpigotHeadsManager extends AbstractHeadsManager {
 
-    public SpigotBrickTextHeadsManager(File configFile) throws IOException {
-        super(configFile);
+    public SpigotHeadsManager(Scheduler scheduler) {
+        super(scheduler);
     }
 
     @Override
-    protected CompletableFuture<URL> retrieveSkinUrl(@NotNull UUID playerId) {
+    protected CompletableFuture<URL> skinUrl(@NotNull UUID playerId) {
         return CompletableFuture.supplyAsync(() -> {
-            Player player = Bukkit.getPlayer(playerId);
-            PlayerProfile profile;
-            if (player != null) {
-                profile = player.getPlayerProfile();
-            } else {
-                profile = Bukkit.createPlayerProfile(UUID.randomUUID(), RandomStringUtils.randomAlphanumeric(16));
-            }
-            URL skin = profile.getTextures().getSkin();
+            OfflinePlayer player = Bukkit.getOfflinePlayer(playerId);
+            URL skin = player.getPlayerProfile().getTextures().getSkin();
             if (skin == null) {
                 skin = offlinePlayer(playerId).join();
             }
@@ -49,7 +41,7 @@ public class SpigotBrickTextHeadsManager extends BrickTextHeadsManager {
                         + playerId.toString().replace("-", ""));
                 try (InputStreamReader isr = new InputStreamReader(url.openStream())) {
                     JsonElement json = JsonParser.parseReader(isr);
-                    if ( json.isJsonNull() ) {
+                    if (json.isJsonNull()) {
                         return null;
                     }
                     JsonObject texture = json.getAsJsonObject().get("properties").getAsJsonArray().get(0).getAsJsonObject();
@@ -58,12 +50,11 @@ public class SpigotBrickTextHeadsManager extends BrickTextHeadsManager {
                     return new URL(result);
                 }
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                return null;
             }
         }).exceptionally(ex -> {
             ex.printStackTrace();
             return null;
         });
     }
-
 }

@@ -1,26 +1,24 @@
-package com.guflimc.brick.textheads.minestom;
+package com.guflimc.brick.texticons.minestom.heads;
 
-import com.guflimc.brick.textheads.common.BrickTextHeadsManager;
+import com.guflimc.brick.scheduler.api.Scheduler;
+import com.guflimc.brick.texticons.common.heads.AbstractHeadsManager;
 import net.minestom.server.entity.PlayerSkin;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Base64;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
-public class MinestomBrickTextHeadManager extends BrickTextHeadsManager {
+public class MinestomHeadsManager extends AbstractHeadsManager {
 
-    public MinestomBrickTextHeadManager(InputStream configInput) throws IOException {
-        super(configInput);
+    public MinestomHeadsManager(Scheduler scheduler) {
+        super(scheduler);
     }
 
     @Override
-    protected CompletableFuture<URL> retrieveSkinUrl(@NotNull UUID playerId) {
+    protected CompletableFuture<URL> skinUrl(@NotNull UUID playerId) {
         return CompletableFuture.supplyAsync(() -> {
             PlayerSkin playerSkin = PlayerSkin.fromUuid(playerId.toString());
 
@@ -33,9 +31,8 @@ public class MinestomBrickTextHeadManager extends BrickTextHeadsManager {
             try {
                 return new URL(url);
             } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
+                return null;
             }
         });
     }
-
 }
